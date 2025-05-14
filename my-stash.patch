@@ -1,0 +1,283 @@
+diff --git a/iQuiz/Base.lproj/Main.storyboard b/iQuiz/Base.lproj/Main.storyboard
+index 495f44a..4a25768 100644
+--- a/iQuiz/Base.lproj/Main.storyboard
++++ b/iQuiz/Base.lproj/Main.storyboard
+@@ -49,6 +49,7 @@
+                     <connections>
+                         <outlet property="table" destination="7uj-Jv-OPv" id="yP3-nb-KHP"/>
+                         <segue destination="jhg-HM-LCI" kind="show" identifier="startQuiz" id="aAi-UB-yus"/>
++                        <segue destination="ULq-6N-b2K" kind="show" identifier="showSettings" id="ufD-IF-XsR"/>
+                     </connections>
+                 </viewController>
+                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+@@ -63,21 +64,21 @@
+                         <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                         <subviews>
+-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YgW-Ge-CPr">
+-                                <rect key="frame" x="162.33333333333334" y="150" width="68.666666666666657" height="20.333333333333343"/>
++                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YgW-Ge-CPr">
++                                <rect key="frame" x="20" y="150" width="353" height="20.333333333333343"/>
+                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                 <nil key="textColor"/>
+                                 <nil key="highlightedColor"/>
+                             </label>
+                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="hWH-0A-V1B">
+-                                <rect key="frame" x="75" y="194.33333333333331" width="243" height="523.66666666666674"/>
++                                <rect key="frame" x="20" y="194.33333333333331" width="353" height="523.66666666666674"/>
+                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                 <prototypes>
+                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AnswerCell" id="dG2-Ey-GBE">
+-                                        <rect key="frame" x="0.0" y="50" width="243" height="43.666667938232422"/>
++                                        <rect key="frame" x="0.0" y="50" width="353" height="43.666667938232422"/>
+                                         <autoresizingMask key="autoresizingMask"/>
+                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dG2-Ey-GBE" id="PTN-A9-fHc">
+-                                            <rect key="frame" x="0.0" y="0.0" width="243" height="43.666667938232422"/>
++                                            <rect key="frame" x="0.0" y="0.0" width="353" height="43.666667938232422"/>
+                                             <autoresizingMask key="autoresizingMask"/>
+                                         </tableViewCellContentView>
+                                     </tableViewCell>
+@@ -104,16 +105,17 @@
+                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                         <constraints>
+                             <constraint firstItem="hyn-X0-Y1S" firstAttribute="leading" secondItem="jCQ-jK-eAG" secondAttribute="leading" constant="35" id="3uQ-FT-S7p"/>
+-                            <constraint firstItem="jCQ-jK-eAG" firstAttribute="trailing" secondItem="hWH-0A-V1B" secondAttribute="trailing" constant="75" id="6hZ-Bg-c8w"/>
+                             <constraint firstItem="hWH-0A-V1B" firstAttribute="top" secondItem="YgW-Ge-CPr" secondAttribute="bottom" constant="24" id="7bB-NU-AId"/>
+-                            <constraint firstItem="hWH-0A-V1B" firstAttribute="leading" secondItem="jCQ-jK-eAG" secondAttribute="leading" constant="75" id="89v-7l-iCQ"/>
+                             <constraint firstItem="Z9s-cN-gMH" firstAttribute="leading" secondItem="jCQ-jK-eAG" secondAttribute="leading" constant="155" id="8TT-ke-SiE"/>
++                            <constraint firstItem="jCQ-jK-eAG" firstAttribute="trailing" secondItem="hWH-0A-V1B" secondAttribute="trailing" constant="20" id="JPg-hR-g2y"/>
+                             <constraint firstItem="YgW-Ge-CPr" firstAttribute="centerX" secondItem="J7b-Eo-kdu" secondAttribute="centerX" id="gra-Cf-rpV"/>
+                             <constraint firstItem="jCQ-jK-eAG" firstAttribute="trailing" secondItem="Z9s-cN-gMH" secondAttribute="trailing" constant="155" id="j6O-qd-aRi"/>
+                             <constraint firstItem="YgW-Ge-CPr" firstAttribute="top" secondItem="jCQ-jK-eAG" secondAttribute="top" constant="150" id="jn1-ad-Tiv"/>
+                             <constraint firstItem="jCQ-jK-eAG" firstAttribute="bottom" secondItem="Z9s-cN-gMH" secondAttribute="bottom" constant="65" id="trj-Se-fLr"/>
+                             <constraint firstItem="Z9s-cN-gMH" firstAttribute="top" secondItem="hWH-0A-V1B" secondAttribute="bottom" constant="24" id="vVN-Ur-1gI"/>
+                             <constraint firstItem="hyn-X0-Y1S" firstAttribute="top" secondItem="jCQ-jK-eAG" secondAttribute="top" constant="65" id="wIu-5u-TJB"/>
++                            <constraint firstItem="YgW-Ge-CPr" firstAttribute="leading" secondItem="jCQ-jK-eAG" secondAttribute="leading" constant="20" id="yJs-8S-OZ6"/>
++                            <constraint firstItem="hWH-0A-V1B" firstAttribute="leading" secondItem="jCQ-jK-eAG" secondAttribute="leading" constant="20" id="yKn-mY-WmG"/>
+                         </constraints>
+                     </view>
+                     <navigationItem key="navigationItem" id="0gY-Sx-DQY"/>
+@@ -149,8 +151,8 @@
+                                     <action selector="nextButton:" destination="hcc-yu-om2" eventType="touchUpInside" id="NFn-IT-6Ss"/>
+                                 </connections>
+                             </button>
+-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Answer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X02-pB-VKv">
+-                                <rect key="frame" x="55" y="260.33333333333331" width="283" height="21"/>
++                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Answer" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X02-pB-VKv">
++                                <rect key="frame" x="55" y="260" width="283" height="62"/>
+                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                 <nil key="textColor"/>
+                                 <nil key="highlightedColor"/>
+@@ -256,9 +258,48 @@
+             </objects>
+             <point key="canvasLocation" x="2467.93893129771" y="15.492957746478874"/>
+         </scene>
++        <!--Settings View Controller-->
++        <scene sceneID="XRe-3v-jpL">
++            <objects>
++                <viewController id="ULq-6N-b2K" customClass="SettingsViewController" customModule="iQuiz" customModuleProvider="target" sceneMemberID="viewController">
++                    <view key="view" contentMode="scaleToFill" id="Ole-jD-REg">
++                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
++                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
++                        <subviews>
++                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter URL here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="duF-Di-gbc">
++                                <rect key="frame" x="35" y="235" width="323" height="34"/>
++                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
++                                <textInputTraits key="textInputTraits"/>
++                            </textField>
++                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cJV-ap-65N">
++                                <rect key="frame" x="141" y="304" width="112" height="35"/>
++                                <state key="normal" title="Button"/>
++                                <buttonConfiguration key="configuration" style="gray" title="Check Now"/>
++                                <connections>
++                                    <action selector="checkNow:" destination="ULq-6N-b2K" eventType="touchUpInside" id="p1f-5O-2jr"/>
++                                </connections>
++                            </button>
++                        </subviews>
++                        <viewLayoutGuide key="safeArea" id="9Js-MR-OTC"/>
++                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
++                        <constraints>
++                            <constraint firstItem="duF-Di-gbc" firstAttribute="leading" secondItem="9Js-MR-OTC" secondAttribute="leading" constant="35" id="NeH-dr-WCj"/>
++                            <constraint firstItem="duF-Di-gbc" firstAttribute="top" secondItem="9Js-MR-OTC" secondAttribute="top" constant="235" id="REK-5B-fzY"/>
++                            <constraint firstItem="cJV-ap-65N" firstAttribute="top" secondItem="duF-Di-gbc" secondAttribute="bottom" constant="35" id="csm-Ye-mEO"/>
++                            <constraint firstItem="9Js-MR-OTC" firstAttribute="trailing" secondItem="duF-Di-gbc" secondAttribute="trailing" constant="35" id="fwc-Vw-zx8"/>
++                        </constraints>
++                    </view>
++                    <navigationItem key="navigationItem" id="eny-V8-POq"/>
++                    <connections>
++                        <outlet property="url" destination="duF-Di-gbc" id="XjS-vl-j2I"/>
++                    </connections>
++                </viewController>
++                <placeholder placeholderIdentifier="IBFirstResponder" id="Tbn-rv-RXb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
++            </objects>
++            <point key="canvasLocation" x="130.53435114503816" y="686.61971830985919"/>
++        </scene>
+     </scenes>
+     <inferredMetricsTieBreakers>
+-        <segue reference="Otx-ow-D3q"/>
+         <segue reference="lIO-Dn-Qxl"/>
+     </inferredMetricsTieBreakers>
+     <resources>
+diff --git a/iQuiz/SettingsViewController.swift b/iQuiz/SettingsViewController.swift
+new file mode 100644
+index 0000000..ce76386
+--- /dev/null
++++ b/iQuiz/SettingsViewController.swift
+@@ -0,0 +1,81 @@
++//
++//  SettingsViewController.swift
++//  iQuiz
++//
++//  Created by Mor Vered on 5/13/25.
++//
++
++import UIKit
++
++class SettingsViewController: UIViewController {
++    var quizData: [[String: Any]] = []
++    
++    @IBOutlet weak var url: UITextField!
++    override func viewDidLoad() {
++        super.viewDidLoad()
++        if let savedURL = UserDefaults.standard.string(forKey: "quizDataURL") {
++            url.text = savedURL
++        } else {
++            url.text = "Enter URL Here"
++        }
++        // Do any additional setup after loading the view.
++    }
++    
++    @IBAction func checkNow(_ sender: Any) {
++        
++        guard let urlString = url.text, let url = URL(string: urlString) else {
++            print("❌ Invalid URL")
++            return
++        }
++        
++        UserDefaults.standard.set(urlString, forKey: "quizDataURL")
++        var request = URLRequest(url: url)
++        request.httpMethod = "GET"
++        let task = URLSession.shared.dataTask(with: request) { data, response, error in
++            DispatchQueue.main.async {
++                
++                if let error = error {
++                    let alert = UIAlertController(
++                        title: "Network Error",
++                        message: error.localizedDescription,
++                        preferredStyle: .alert
++                    )
++                    alert.addAction(UIAlertAction(title: "OK", style: .default))
++                    self.present(alert, animated: true)
++                    return
++                }
++                
++                guard let data = data else {
++                    print("no data received")
++                    return
++                }
++                
++                do {
++                    
++                    let json = try JSONSerialization.jsonObject(with: data, options: [])
++                    if let array = json as? [[String: Any]] {
++                        self.quizData = array
++
++                        NotificationCenter.default.post(name: NSNotification.Name("QuizDataUpdated"), object: array)
++
++                       print("✅ \(array.count) quiz topics loaded.")
++                    } else {
++                        print( "❌ Unexpected JSON format.")
++                    }
++                } catch {
++                    print("❌ JSON error: \(error.localizedDescription)")
++                }
++            }
++        }
++        task.resume()
++    }
++}
++    /*
++    // MARK: - Navigation
++
++    // In a storyboard-based application, you will often want to do a little preparation before navigation
++    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
++        // Get the new view controller using segue.destination.
++        // Pass the selected object to the new view controller.
++    }
++    */
+diff --git a/iQuiz/ViewController.swift b/iQuiz/ViewController.swift
+index 0dedbf8..0323022 100644
+--- a/iQuiz/ViewController.swift
++++ b/iQuiz/ViewController.swift
+@@ -21,17 +21,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
+         let imageName: String
+         let questions: [QuizQuestion]
+     }
++    var quizTopics: [QuizTopic] = []
+ 
+ 
+     @IBAction func settings(_ sender: Any) {
+-        let alert = UIAlertController(title: "Settings", message: "Settings go here", preferredStyle: .alert)
+-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+-            present(alert, animated: true, completion: nil)
++//        let alert = UIAlertController(title: "Settings", message: "Settings go here", preferredStyle: .alert)
++//            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
++//            present(alert, animated: true, completion: nil)
++        performSegue(withIdentifier: "showSettings", sender: self)
+     }
+     
+     @IBOutlet weak var table: UITableView!
+ 
+-    let quizTopics: [QuizTopic] = [
++    let defaultQuizTopics: [QuizTopic] = [
+         QuizTopic(
+             title: "Mathematics",
+             description: "Solve math questions!",
+@@ -98,12 +100,47 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
+     override func viewDidLoad() {
+         super.viewDidLoad()
+         // Do any additional setup after loading the view.
++        quizTopics = defaultQuizTopics
+         
+         table.dataSource = self
+         table.delegate = self
++        NotificationCenter.default.addObserver(forName: NSNotification.Name("QuizDataUpdated"), object: nil, queue: .main) { notification in
++                    if let json = notification.object as? [[String: Any]] {
++                        self.quizTopics = self.parseQuizTopics(from: json)
++                        self.table.reloadData()
++                    }
++                }
++
+         table.reloadData()
+ 
+     }
++    func parseQuizTopics(from json: [[String: Any]]) -> [QuizTopic] {
++            var topics: [QuizTopic] = []
++
++            for item in json {
++                guard let title = item["title"] as? String,
++                      let desc = item["desc"] as? String,
++                      let questions = item["questions"] as? [[String: Any]] else {
++                    continue
++                }
++
++                let parsedQuestions = questions.compactMap { q -> QuizQuestion? in
++                    guard let text = q["text"] as? String,
++                          let options = q["answers"] as? [String],
++                          let correctStr = q["answer"] as? String,
++                          let correctIndex = Int(correctStr) else {
++                        return nil
++                    }
++                    return QuizQuestion(question: text, options: options, correctAnswerIndex: correctIndex)
++                }
++
++                let topic = QuizTopic(title: title, description: desc, imageName: "default.icon", questions: parsedQuestions)
++                topics.append(topic)
++            }
++
++            return topics
++        }
++   
+ 
+     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+         performSegue(withIdentifier: "startQuiz", sender: indexPath)

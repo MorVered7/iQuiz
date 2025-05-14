@@ -1,3 +1,11 @@
+//
+//  AnswerViewController.swift
+//  iQuiz
+//
+//  Created by Mor Vered on 5/13/25.
+//
+
+
 import UIKit
 
 class AnswerViewController: UIViewController {
@@ -23,19 +31,19 @@ class AnswerViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showNextQuestion",
-               let nextVC = segue.destination as? QuestionViewController {
-                nextVC.quizTopic = quizTopic
-                nextVC.currentQuestionIndex = currentQuestionIndex + 1
-                nextVC.correctCount = correctCount 
-            }
-
-            if segue.identifier == "showFinished",
-               let finishedVC = segue.destination as? FinishedViewController {
-                finishedVC.correctCount = correctCount
-                finishedVC.totalQuestions = quizTopic.questions.count
-            }
+           let nextVC = segue.destination as? QuestionViewController {
+            nextVC.quizTopic = quizTopic
+            nextVC.currentQuestionIndex = currentQuestionIndex + 1
+            nextVC.correctCount = correctCount
+        }
+        
+        if segue.identifier == "showFinished",
+           let finishedVC = segue.destination as? FinishedViewController {
+            finishedVC.correctCount = correctCount
+            finishedVC.totalQuestions = quizTopic.questions.count
+        }
     }
-
+    
     @IBAction func nextButton(_ sender: Any) {
         if currentQuestionIndex + 1 < quizTopic.questions.count {
             performSegue(withIdentifier: "showNextQuestion", sender: nil)
@@ -46,3 +54,4 @@ class AnswerViewController: UIViewController {
     @IBAction func backToMainTapped(_ sender: UIButton) {
         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
     }
+}

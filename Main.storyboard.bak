@@ -48,14 +48,19 @@
                     </view>
                     <connections>
                         <outlet property="table" destination="7uj-Jv-OPv" id="yP3-nb-KHP"/>
+
                         <segue destination="jhg-HM-LCI" kind="show" identifier="startQuiz" id="aAi-UB-yus"/>
                         <segue destination="ULq-6N-b2K" kind="show" identifier="showSettings" id="ufD-IF-XsR"/>
+
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="130.53435114503816" y="3.5211267605633805"/>
         </scene>
+
+    </scenes>
+
         <!--Question View Controller-->
         <scene sceneID="JYj-fG-Q6b">
             <objects>
@@ -298,10 +303,11 @@
             </objects>
             <point key="canvasLocation" x="130.53435114503816" y="686.61971830985919"/>
         </scene>
-    </scenes>
+    
     <inferredMetricsTieBreakers>
-        <segue reference="aAi-UB-yus"/>
+        <segue reference="lIO-Dn-Qxl"/>
     </inferredMetricsTieBreakers>
+
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
