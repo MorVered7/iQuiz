@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Sample Quiz",
+    "desc": "Just testing!",
+    "questions": [
+      {
+        "text": "What is 1 + 1?",
+        "answers": ["1", "2", "3"],
+        "answer": "1"
+      }
+    ]
+  }
+]
+
