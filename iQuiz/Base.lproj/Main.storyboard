@@ -22,7 +22,12 @@
                                 <items>
                                     <barButtonItem title="Settings" id="nRM-0A-Ktr">
                                         <connections>
-                                            <action selector="settings:" destination="BYZ-38-t0r" id="gkB-Mc-cLP"/>
+                                            <action selector="openSystemSettings:" destination="BYZ-38-t0r" id="Pkp-w9-QeF"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Reload Data" id="C0j-a9-CsQ">
+                                        <connections>
+                                            <action selector="reloadDataTapped:" destination="BYZ-38-t0r" id="dp8-qz-2hT"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>

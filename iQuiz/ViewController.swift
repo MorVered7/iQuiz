@@ -36,27 +36,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var table: UITableView!
 
 
-      
-
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return quizTopics.count
-        }
-
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "StringCell") ?? UITableViewCell(style: .default, reuseIdentifier: "StringCell")
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return quizTopics.count
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "StringCell") ?? UITableViewCell(style: .default, reuseIdentifier: "StringCell")
                
-               let topic = quizTopics[indexPath.row]
+        let topic = quizTopics[indexPath.row]
                
-               cell.textLabel?.numberOfLines = 2
-               cell.textLabel?.text = "\(topic.title)\n\(topic.description)"
-               cell.imageView?.image = UIImage(named: topic.imageName)
+        cell.textLabel?.numberOfLines = 2
+        cell.textLabel?.text = "\(topic.title)\n\(topic.description)"
+        cell.imageView?.image = UIImage(named: topic.imageName)
 
-               cell.separatorInset = .zero
-               cell.layoutMargins = .zero
-               cell.preservesSuperviewLayoutMargins = false
-
-               return cell
-        }
+        cell.separatorInset = .zero
+        cell.layoutMargins = .zero
+        cell.preservesSuperviewLayoutMargins = false
+        return cell
+    }
 
 
     
@@ -107,7 +103,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        quizTopics = defaultQuizTopics
+        
+        if let loadedJSON = loadQuizDataFromFile() {
+            self.quizTopics = parseQuizTopics(from: loadedJSON)
+            print("Loaded quiz topics from local file")
+        } else if let urlString = UserDefaults.standard.string(forKey: "quizDataURL"),
+                  let url = URL(string: urlString) {
+            print("No local file, trying settings URL")
+            fetchQuizDataFromSettingsURL(using: url)
+        } else {
+            print("No saved file or settings URL. Loading defaults.")
+            self.quizTopics = defaultQuizTopics
+        }
+
+
         
         table.dataSource = self
         table.delegate = self
@@ -161,7 +170,75 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
 
-   
+    func loadQuizDataFromFile() -> [[String: Any]]? {
+        let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("quizData.json")
+        
+        do {
+            let data = try Data(contentsOf: fileURL)
+            if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] {
+                return json
+            } else {
+                print("Invalid JSON format in saved file")
+                return nil
+            }
+        } catch {
+            print("Couldn't load saved quiz data: \(error.localizedDescription)")
+            return nil
+        }
+    }
+    @IBAction func openSystemSettings(_ sender: Any) {
+        if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+            if UIApplication.shared.canOpenURL(settingsURL) {
+                UIApplication.shared.open(settingsURL)
+            }
+        }
+    }
+    func fetchQuizDataFromSettingsURL(using url: URL) {
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    print("Network error: \(error.localizedDescription)")
+                    self.quizTopics = self.defaultQuizTopics
+                    self.table.reloadData()
+                    return
+                }
+
+                guard let data = data,
+                      let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [[String: Any]] else {
+                    print("Failed to parse JSON from response")
+                    self.quizTopics = self.defaultQuizTopics
+                    self.table.reloadData()
+                    return
+                }
+
+                self.quizTopics = self.parseQuizTopics(from: json)
+                self.table.reloadData()
+
+               
+                let fileURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                    .appendingPathComponent("quizData.json")
+                do {
+                    try data.write(to: fileURL)
+                    print("Saved quiz data to: \(fileURL.path)")
+                } catch {
+                    print("Failed to save quiz data: \(error.localizedDescription)")
+                }
+            }
+        }
+
+        task.resume()
+    }
+
+    @IBAction func reloadDataTapped(_ sender: Any) {
+        if let urlString = UserDefaults.standard.string(forKey: "quizDataURL"),
+           let url = URL(string: urlString) {
+            print("Reloading data from URL: \(urlString)")
+            fetchQuizDataFromSettingsURL(using: url)
+        } else {
+            print("No valid URL in settings")
+        }
+    }
+
 
 }
 

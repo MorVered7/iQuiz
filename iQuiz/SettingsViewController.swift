@@ -13,8 +13,8 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var url: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let savedURL = UserDefaults.standard.string(forKey: "quizDataURL") {
-            url.text = savedURL
+        if let settingsURL = UserDefaults.standard.string(forKey: "quizDataURL") {
+            url.text = settingsURL
         } else {
             url.text = "Enter URL Here"
         }
@@ -57,7 +57,14 @@ class SettingsViewController: UIViewController {
                         self.quizData = array
 
                         NotificationCenter.default.post(name: NSNotification.Name("QuizDataUpdated"), object: array)
-
+                        do {
+                            let dataToSave = try JSONSerialization.data(withJSONObject: array, options: [])
+                            let fileURL = self.getQuizDataFileURL()
+                            try dataToSave.write(to: fileURL)
+                            print("✅ Saved quiz data to: \(fileURL.path)")
+                        } catch {
+                            print("❌ Failed to save quiz data: \(error.localizedDescription)")
+                        }
                        print("✅ \(array.count) quiz topics loaded.")
                     } else {
                         print( "❌ Unexpected JSON format.")
@@ -69,6 +76,11 @@ class SettingsViewController: UIViewController {
         }
         task.resume()
     }
+    func getQuizDataFileURL() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0].appendingPathComponent("quizData.json")
+    }
+    
 }
     /*
     // MARK: - Navigation
